@@ -3,7 +3,10 @@ package br.upe.reservapatterns.booking.creation;
 import java.time.LocalDateTime;
 
 import br.upe.reservapatterns.booking.entity.Booking;
+import br.upe.reservapatterns.booking.entity.BookingKind;
+import br.upe.reservapatterns.booking.entity.BookingStatus;
 import br.upe.reservapatterns.kit.entity.Kit;
+import br.upe.reservapatterns.kit.entity.KitItem;
 import br.upe.reservapatterns.staff.entity.StaffUser;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +14,21 @@ import org.springframework.stereotype.Component;
 public class ResearchBookingCreator extends BookingCreator {
   @Override
   protected Booking create(Kit kit, StaffUser requester, LocalDateTime startsAt) {
-    throw new UnsupportedOperationException("Implementar reserva para pesquisa");
+      LocalDateTime endsAt = startsAt.plusHours(48);
+
+      Booking booking = new Booking(
+              kit,
+              requester,
+              startsAt,
+              endsAt,
+              BookingKind.RESEARCH,
+              BookingStatus.PENDING
+      );
+
+      for (KitItem kitItem : kit.getItems()) {
+          booking.addItem(kitItem.getEquipment(), kitItem.getQuantity());
+      }
+
+      return booking;
   }
 }
