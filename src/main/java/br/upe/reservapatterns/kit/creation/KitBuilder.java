@@ -1,5 +1,5 @@
 package br.upe.reservapatterns.kit.creation;
-
+//
 import br.upe.reservapatterns.equipment.entity.Equipment;
 import br.upe.reservapatterns.kit.entity.Kit;
 import java.util.ArrayList;
